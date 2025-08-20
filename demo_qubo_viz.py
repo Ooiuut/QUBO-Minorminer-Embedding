@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from qubo_graph_strict import generate_qubo_graph
 
 def draw_graph_and_degree_hist(G, title, ax_graph, ax_hist, seed=42):
-    # 图布局
+    
     pos = nx.spring_layout(G, seed=seed)
     nx.draw_networkx_nodes(G, pos, node_size=500, node_color="skyblue",
                            edgecolors="black", ax=ax_graph)
@@ -14,7 +14,7 @@ def draw_graph_and_degree_hist(G, title, ax_graph, ax_hist, seed=42):
     ax_graph.set_title(title)
     ax_graph.axis("off")
 
-    # 度数直方图
+    
     degrees = [deg for _, deg in G.degree()]
     ax_hist.hist(degrees, bins=range(0, max(degrees)+2), align="left")
     ax_hist.set_xlabel("degree")
@@ -44,7 +44,7 @@ def main():
             axes[0], axes[1], seed=args.seed
         )
     else:
-        # 左：deterministic；右：probabilistic（同 N,d）
+        
         Gd = generate_qubo_graph(N=args.N, d=args.d, mode="deterministic", seed=args.seed)
         Gp = generate_qubo_graph(
             N=args.N, d=args.d, mode="probabilistic", dist=args.dist,
